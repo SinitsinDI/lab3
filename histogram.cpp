@@ -41,12 +41,15 @@ void svg_text(double left, double baseline, string text)
     cout << "<text x='" << left << "' y='"<<baseline<<"'>"<<text<<"</text>";
 
 }
-
+double bin_opacity17(double bin, size_t max_count)
+{
+    return bin/max_count;
+}
 void show_histogram_svg(const vector<size_t>& bins)
 {
     const size_t screen_width=80;
     const size_t width=screen_width-4;
-    const auto IMAGE_WIDTH = 400;
+    const auto IMAGE_WIDTH = 2000;
     const auto IMAGE_HEIGHT = 300;
     const auto TEXT_LEFT = 20;
     const auto TEXT_BASELINE = 20;
@@ -65,27 +68,30 @@ void show_histogram_svg(const vector<size_t>& bins)
             max_count = count;
         }
     }
+
     const bool scaling_needed = max_count > width;
 
-    for (size_t bin : bins)
+    if (scaling_needed)
     {
-        if (scaling_needed)
+        const double scaling_multiplier = (double)width / max_count;
+        for (size_t bin : bins)
         {
-            const double scaling_multiplier = (double)width / max_count;
-            bin = (size_t)(bin * scaling_multiplier);
+            const double bin_width = BLOCK_WIDTH*bin*scaling_multiplier;
+            svg_text(TEXT_LEFT, top + TEXT_BASELINE, to_string(bin));
+            svg_rect(TEXT_WIDTH, top, bin_width, BIN_HEIGHT,stroke,fill,bin_opacity17(bin,max_count));
+            top += BIN_HEIGHT;
         }
-
-
     }
-    for (size_t bin : bins)
+    else
     {
-        const double bin_opacity=(double)bin/max_count;
-        const double bin_width = BLOCK_WIDTH * bin;
-        svg_text(TEXT_LEFT, top + TEXT_BASELINE, to_string(bin));
-        svg_rect(TEXT_WIDTH, top, bin_width, BIN_HEIGHT,stroke,fill,bin_opacity);
-        top += BIN_HEIGHT;
+        for (size_t bin : bins)
+        {
+            const double bin_width = BLOCK_WIDTH * bin;
+            svg_text(TEXT_LEFT, top + TEXT_BASELINE, to_string(bin));
+            svg_rect(TEXT_WIDTH, top, bin_width, BIN_HEIGHT,stroke,fill,bin_opacity17(bin,max_count));
+            top += BIN_HEIGHT;
+        }
     }
-
     svg_end();
 }
 
