@@ -1,7 +1,18 @@
 #include "histogram.h"
 
 #include <cassert>
-
+void test_bin_opacity()
+{
+    double bin=5;
+    size_t max_count=10;
+    assert(bin_opacity17(bin,max_count)==0.5);
+}
+void test_bin_opacity2()
+{
+    double bin=0;
+    size_t max_count=10;
+    assert(bin_opacity17(bin,max_count)==0.0);
+}
 void test_positive()
 {
     double min = 0;
@@ -47,6 +58,8 @@ void test_empty()
 int
 main()
 {
+    test_bin_opacity();
+    test_bin_opacity2();
     test_positive();
     test_negative();
     test_equal();
