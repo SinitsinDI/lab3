@@ -1,6 +1,12 @@
-#include "histogram.h"
 #include "svg.h"
 #include <iostream>
+double bin_opacity17(double bin, size_t max_count)
+{
+    if(max_count==0)
+        return 0;
+    return bin/max_count;
+}
+
 void svg_begin(double width, double height)
 {
     cout << "<?xml version='1.0' encoding='UTF-8'?>\n";

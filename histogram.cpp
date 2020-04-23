@@ -1,8 +1,8 @@
 #include "histogram.h"
-#include "svg.h"
 #include <iostream>
-void find_minmax(vector<double> numbers, double& min, double& max)
+void find_minmax(const vector<double>& numbers, double& min, double& max)
 {
+    if (numbers.size()==0) return;
     min = numbers[0];
     max = numbers[0];
     for (double number : numbers)
@@ -18,10 +18,7 @@ void find_minmax(vector<double> numbers, double& min, double& max)
     }
 }
 
-double bin_opacity17(double bin, size_t max_count)
-{
-    return bin/max_count;
-}
+
 vector<double> input_numbers(size_t count)
 {
     vector<double> result(count);
@@ -32,7 +29,7 @@ vector<double> input_numbers(size_t count)
     return result;
 }
 
-vector <size_t> make_histogram(vector <double> numbers,size_t bin_count,double min,double max)
+vector <size_t> make_histogram(const vector<double>& numbers,size_t bin_count,double min,double max)
 {
     vector<size_t> bins(bin_count);
     for (double number : numbers)
@@ -47,7 +44,7 @@ vector <size_t> make_histogram(vector <double> numbers,size_t bin_count,double m
     return(bins);
 }
 
-void show_histogram_text(vector<size_t>bins)
+void show_histogram_text(const vector<size_t>& bins)
 {
     const size_t screen_width=80;
     const size_t width=screen_width-4;

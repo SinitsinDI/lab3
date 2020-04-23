@@ -13,6 +13,12 @@ void test_bin_opacity2()
     size_t max_count=10;
     assert(bin_opacity17(bin,max_count)==0.0);
 }
+void test_bin_opacity3()
+{
+    double bin=0;
+    size_t max_count=0;
+    assert(bin_opacity17(bin,max_count)==0);
+}
 void test_positive()
 {
     double min = 0;
@@ -60,6 +66,7 @@ main()
 {
     test_bin_opacity();
     test_bin_opacity2();
+    test_bin_opacity3();
     test_positive();
     test_negative();
     test_equal();
