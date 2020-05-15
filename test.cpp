@@ -1,5 +1,5 @@
 #include "histogram.h"
-
+#include "svg.h"
 #include <cassert>
 void test_bin_opacity()
 {
