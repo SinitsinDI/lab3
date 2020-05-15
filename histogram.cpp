@@ -1,5 +1,17 @@
 #include "histogram.h"
 #include <iostream>
+
+vector<double> input_numbers(istream& in ,size_t count)
+{
+    vector<double> result(count);
+    for (size_t i = 0; i < count; i++)
+    {
+        cin >> result[i];
+    }
+    return result;
+}
+
+
 void find_minmax(const vector<double>& numbers, double& min, double& max)
 {
     if (numbers.size()==0) return;
@@ -18,24 +30,16 @@ void find_minmax(const vector<double>& numbers, double& min, double& max)
     }
 }
 
-
-vector<double> input_numbers(istream& in ,size_t count)
+vector <size_t> make_histogram(Input data)
 {
-    vector<double> result(count);
-    for (size_t i = 0; i < count; i++)
+    double min;
+    double max;
+    find_minmax(data.numbers,min,max);
+    vector<size_t> bins(data.bin_count);
+    for (double number : data.numbers)
     {
-        cin >> result[i];
-    }
-    return result;
-}
-
-vector <size_t> make_histogram(const vector<double>& numbers,size_t bin_count,double min,double max)
-{
-    vector<size_t> bins(bin_count);
-    for (double number : numbers)
-    {
-        size_t bin = (size_t)((number - min) / (max - min) * bin_count);
-        if (bin == bin_count)
+        size_t bin = (size_t)((number - min) / (max - min) * data.bin_count);
+        if (bin == data.bin_count)
         {
             bin--;
         }

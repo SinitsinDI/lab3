@@ -5,11 +5,11 @@
 	"histogram.h"
 	"svg.h"
 
-1589545827 c:\users\pc\desktop\lab3\3\histogram.h
+1589548177 c:\users\pc\desktop\lab3\3\histogram.h
 	<vector>
 	<iostream>
 
-1589545769 source:c:\users\pc\desktop\lab3\3\histogram.cpp
+1589548030 source:c:\users\pc\desktop\lab3\3\histogram.cpp
 	"histogram.h"
 	<iostream>
 
